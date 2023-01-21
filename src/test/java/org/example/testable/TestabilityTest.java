@@ -15,12 +15,13 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 // // @SuppressWarnings({"unchecked"})
-// @ExtendWith(MockitoExtension.class)
+// @ExtendWith(MockitoExtension.class) /*för att @Mock ska funka*/
 class TestabilityTest {
 
     LoggerImpl logger = new LoggerImpl();
 
-    // List<String> strings = (List<String>) Mockito.mock(List.class);
+    // List<String> strings = /*(List<String>)*/ Mockito.mock(List.class);
+    // eller:
     // @Mock
     //List<String> strings;
     MailSender mailSender = Mockito.mock(MailSender.class);
@@ -32,6 +33,7 @@ class TestabilityTest {
 
         assertTrue(logger.logIsCalled);
         Mockito.verify(mailSender, Mockito.times(1)).sendMail(eq("some-invalid-email-address.com"), anyString());
+        // Mockito.atLeast.......
         // assertThat("test"). ...
     }
 
