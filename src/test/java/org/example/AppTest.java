@@ -1,6 +1,7 @@
 package org.example;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,6 +16,8 @@ class AppTest {
         assertThat(true).isTrue();
     }
 
+    @Tag("REGRESSION")
+    @Tag("slow")
     @Test
     void addTwoNumbersReturnsSum() {
         var result = App.add(1,1);
