@@ -15,7 +15,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 // // @SuppressWarnings({"unchecked"})
-// @ExtendWith(MockitoExtension.class) /*för att @Mock ska funka*/
+@ExtendWith(MockitoExtension.class) /*för att @Mock ska funka*/
 class TestabilityTest {
 
     LoggerImpl logger = new LoggerImpl();
@@ -48,7 +48,20 @@ class TestabilityTest {
     
     }
     
+    @Test
+    void testWithUnnecessary(@Mock Tee tee){
+        when(tee.test()).thenReturn(23);
+
+        tee.test();
+
+    }
 
     
 }
 
+class Tee {
+    
+    int test() {
+        return 0;
+    }
+}

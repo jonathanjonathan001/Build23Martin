@@ -55,6 +55,7 @@
                     <targetTests>
                         <param>org.example.domain*</param>
                     </targetTests>
+                    <mutators>ALL</mutators>
                 </configuration>
                 <dependencies>
                     <dependency>
