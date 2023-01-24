@@ -1,5 +1,8 @@
 package org.example.calculator;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class Calculator {
 
 
@@ -21,4 +24,11 @@ public class Calculator {
         }
         return count;
     }
+
+    public static String greeting(String name, LocalTime currentTime) {
+        if (currentTime.getHour() >= 12)
+            return "Good afternoon " + name;
+        return "Good morning " + name;
+    }
+
 }
