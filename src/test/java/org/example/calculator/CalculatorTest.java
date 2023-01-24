@@ -19,6 +19,13 @@ public class CalculatorTest {
         assertEquals(2, result);
     }
 
+    @Test
+    void addOneWithTwoShouldReturnThree(){
+        int result = Calculator.test(1, 2);
+
+        assertEquals(3, result);
+    }
+
 
 }
 
