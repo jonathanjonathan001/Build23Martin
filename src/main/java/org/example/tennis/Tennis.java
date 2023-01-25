@@ -62,6 +62,8 @@ public class Tennis {
     }
 
     public void incrementScore(String player) {
+        if (isGameOver())
+            throw new IllegalStateException("Game is over");
         score++;
         scores.put(player, scores.get(player) + 1);
     }

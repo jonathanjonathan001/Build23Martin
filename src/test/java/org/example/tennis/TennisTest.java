@@ -3,6 +3,7 @@ package org.example.tennis;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TennisTest {
@@ -145,7 +146,15 @@ class TennisTest {
     }
 
 
+    @Test
+    void callingIncrementScoreWhenGameIsOverThrowsException () {
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
 
+        assertThatThrownBy(() -> tennis.incrementScore("player1")).isInstanceOf(IllegalStateException.class);
+    }
 
 
 }
