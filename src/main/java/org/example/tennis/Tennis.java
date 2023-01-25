@@ -15,6 +15,13 @@ public class Tennis {
         int player1Score = scores.get("player1");
         int player2Score = scores.get("player2");
 
+
+        if (isDeuce(player1Score, player2Score)) {
+
+            return "deuce";
+        }
+
+
         String scoreAsString = "";
 
         scoreAsString += convertScore(player1Score);
@@ -26,6 +33,12 @@ public class Tennis {
 
         return scoreAsString;
     }
+
+    private boolean isDeuce(int player1Score, int player2Score) {
+        return player1Score == 3 && player2Score == 3;
+
+    }
+
 
     private static String convertScore(int playerScore) {
         if (playerScore == 3)

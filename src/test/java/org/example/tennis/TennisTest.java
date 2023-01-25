@@ -1,6 +1,8 @@
 package org.example.tennis;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -73,6 +75,39 @@ public class TennisTest {
 
         assertThat(tennis.isGameOver()).isFalse();
 
+    }
+
+    @Test
+
+    void whenOnePlayerHasWon2MoreBallsThanTheOtherGameIsOver() {
+        Tennis tennis = new Tennis();
+
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player2");
+        tennis.incrementScore("player2");
+        tennis.incrementScore("player2");
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
+
+
+        assertThat(tennis.isGameOver()).isTrue();
+
+    }
+
+    @Test
+    void whenBothPlayersHaveScoredAtLeast3BallsAndTheyHaveTheSameScoreScoreShouldBeDeuce(){
+        Tennis tennis = new Tennis();
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player2");
+        tennis.incrementScore("player2");
+        tennis.incrementScore("player2");
+
+        assertThat(tennis.readScore()).isEqualTo("deuce");
+        assertThat(tennis.isGameOver()).isFalse();
     }
 
 }
