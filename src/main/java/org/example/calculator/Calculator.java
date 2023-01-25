@@ -2,6 +2,7 @@ package org.example.calculator;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Random;
 
 public class Calculator {
 
@@ -30,5 +31,26 @@ public class Calculator {
             return "Good afternoon " + name;
         return "Good morning " + name;
     }
+
+    private static void t(){}
+
+    public static class Die {
+
+        Random random;
+
+
+        public Die() {
+            random = new Random();
+        }
+        public Die(Random random) {
+            this.random = random;
+        }
+
+        public int roll() {
+            return random.nextInt(1,7);
+
+        }
+    }
+
 
 }
