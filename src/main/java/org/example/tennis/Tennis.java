@@ -17,7 +17,10 @@ public class Tennis {
 
 
         if (isDeuce(player1Score, player2Score)) {
-
+            if (player1Score > player2Score)
+                return "advantage player1";
+            if (player2Score > player1Score)
+                return "advantage player2";
             return "deuce";
         }
 
@@ -35,7 +38,7 @@ public class Tennis {
     }
 
     private boolean isDeuce(int player1Score, int player2Score) {
-        return player1Score == 3 && player2Score == 3;
+        return (player1Score >= 3 && player2Score >= 3);
 
     }
 

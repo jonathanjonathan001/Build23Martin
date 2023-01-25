@@ -7,18 +7,30 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TennisTest {
+class TennisTest {
+
+    private Tennis tennis = new Tennis();
+
+
+    private void play40_40() {
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player2");
+        tennis.incrementScore("player2");
+        tennis.incrementScore("player2");
+    }
+
 
     @Test
     void newTennisObjectHasScoreLoveLove(){
-        Tennis tennis = new Tennis();
 
         assertThat(tennis.readScore()).isEqualTo("love-love");
     }
 
     @Test
     void afterPlayer1WinsBallScoreShouldBe15Love(){
-        Tennis tennis = new Tennis();
+
 
         tennis.incrementScore("player1");
 
@@ -27,7 +39,7 @@ public class TennisTest {
 
     @Test
     void afterPlayersHaveWonOneBallEachScoreShouldBe1515() {
-        Tennis tennis = new Tennis();
+
         tennis.incrementScore("player1");
         tennis.incrementScore("player2");
 
@@ -36,7 +48,7 @@ public class TennisTest {
 
     @Test
     void afterPlayer1HasWonTwoBallsScoreShouldBe30Love(){
-        Tennis tennis = new Tennis();
+
 
         tennis.incrementScore("player1");
         tennis.incrementScore("player1");
@@ -44,7 +56,7 @@ public class TennisTest {
     }
 
     void afterPlayer1HasWonThreeBallsScoreShouldBe40Love() {
-        Tennis tennis = new Tennis();
+
 
         tennis.incrementScore("player1");
         tennis.incrementScore("player1");
@@ -53,7 +65,7 @@ public class TennisTest {
 
     @Test
     void playerThatHasWon3BallsAndWinsAnotherShouldWinTheGame(){
-        Tennis tennis = new Tennis();
+
         tennis.incrementScore("player1");
         tennis.incrementScore("player1");
         tennis.incrementScore("player1");
@@ -64,30 +76,22 @@ public class TennisTest {
 
     @Test
     void whenBothPlayersHaveWon3BallsPlayer1ShouldNotWinAfterOneMoreBall(){
-        Tennis tennis = new Tennis();
-        tennis.incrementScore("player1");
-        tennis.incrementScore("player1");
-        tennis.incrementScore("player1");
-        tennis.incrementScore("player2");
-        tennis.incrementScore("player2");
-        tennis.incrementScore("player2");
+
+        play40_40();
         tennis.incrementScore("player1");
 
         assertThat(tennis.isGameOver()).isFalse();
 
     }
 
+
+
     @Test
 
     void whenOnePlayerHasWon2MoreBallsThanTheOtherGameIsOver() {
-        Tennis tennis = new Tennis();
 
-        tennis.incrementScore("player1");
-        tennis.incrementScore("player1");
-        tennis.incrementScore("player1");
-        tennis.incrementScore("player2");
-        tennis.incrementScore("player2");
-        tennis.incrementScore("player2");
+
+        play40_40();
         tennis.incrementScore("player1");
         tennis.incrementScore("player1");
 
@@ -98,16 +102,50 @@ public class TennisTest {
 
     @Test
     void whenBothPlayersHaveScoredAtLeast3BallsAndTheyHaveTheSameScoreScoreShouldBeDeuce(){
-        Tennis tennis = new Tennis();
+
+        play40_40();
+
+        assertThat(tennis.readScore()).isEqualTo("deuce");
+        assertThat(tennis.isGameOver()).isFalse();
+    }
+
+    @Test
+    void whenBothPlayersHaveSameScoreAndMoreThan3BallsShouldBeDeuce(){
+
+        play40_40();
         tennis.incrementScore("player1");
-        tennis.incrementScore("player1");
-        tennis.incrementScore("player1");
-        tennis.incrementScore("player2");
-        tennis.incrementScore("player2");
         tennis.incrementScore("player2");
 
         assertThat(tennis.readScore()).isEqualTo("deuce");
         assertThat(tennis.isGameOver()).isFalse();
     }
+
+    @Test
+    void whenBothPlayersHaveMoreThan3BallsAndPlayerOneHasAdvantageOfOneShouldBeAdvantagePlayerName(){
+
+        play40_40();
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player2");
+        tennis.incrementScore("player1");
+
+
+        assertThat(tennis.readScore()).isEqualTo("advantage player1");
+        assertThat(tennis.isGameOver()).isFalse();
+    }
+
+    @Test
+    void whenBothPlayersHaveMoreThan3BallsAndPlayer2HasAdvantageOfOneShouldBeAdvantagePlayerName(){
+
+        play40_40();
+        tennis.incrementScore("player1");
+        tennis.incrementScore("player2");
+        tennis.incrementScore("player2");
+
+
+        assertThat(tennis.readScore()).isEqualTo("advantage player2");
+        assertThat(tennis.isGameOver()).isFalse();
+    }
+
+
 
 }
